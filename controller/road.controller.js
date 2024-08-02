@@ -1,3 +1,5 @@
+const road = require("../models/road");
+
 const addRoad = async (req, res) => {
     const { name, startLocation, endLocation } = req.body;
     try {
@@ -8,6 +10,16 @@ const addRoad = async (req, res) => {
         });
         await newRoad.save();
         return res.status(201).json(newRoad);
+    } catch (error) {
+        console.log(error);
+        return res.status(500).json({ message: "Internal server error" });
+    }
+}
+
+const getAllRoads = async (req, res) => {
+    try {
+        const roads = road.find();
+        return res.status(200).json(roads);
     } catch (error) {
         console.log(error);
         return res.status(500).json({ message: "Internal server error" });
@@ -30,4 +42,6 @@ const updateTrafficCond = (req, res) => {
     }
 }
 
-module.exports = { addRoad, updateTrafficCond }
+
+
+module.exports = { addRoad, updateTrafficCond, getAllRoads }

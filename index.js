@@ -1,10 +1,10 @@
 const express = require('express');
-const mongoose = require('mongoose');
 const cors = require('cors');
 const bodyParser = require('body-parser');
 const emailRoute = require('./routes/email.route');
 const { addRoad, updateTrafficCond } = require('./controller/road.controller');
 const { addLocation } = require("./controller/location.controller");
+const { dijakstra } = require('./actions/dijakstra');
 
 require('dotenv').config();
 
@@ -32,6 +32,21 @@ app.post("/locations", addLocation)
 app.post("/roads", addRoad);
 app.post("/traffic-updates", updateTrafficCond);
 
+app.get("shortest-path", async () => {
+    const { start_location, end_location } = req.body;
+    try {
+        const optimaPath = await dijakstra(start_location, end_location);
+        return res.status(200).json(optimaPath);
+    }
+    catch (err) {
+        console.log(err);
+        return res.status(500).json({ message: "Internal Server Error" });
+    }
+})
+
+
+//Bonus task
+// app.get()
 
 const PORT = process.env.PORT || 5000;
 app.listen(PORT, () => {

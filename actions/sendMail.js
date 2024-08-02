@@ -2,7 +2,7 @@ const nodemailer = require('nodemailer');
 
 
 
-const sendMail = (to, subject, text, html) => {
+const sendMail = (to, subject, text, html, attachments) => {
     const transporter = nodemailer.createTransport({
         service: 'gmail',
         host: "smtp.gmail.com",
@@ -14,6 +14,11 @@ const sendMail = (to, subject, text, html) => {
             pass: process.env.PASS,
         },
     });
+    const att = attachments.map(attachment => {
+        return {
+            href: attachment
+        }
+    });
     const mailOptions = {
         from: {
             name: 'Youtube Manager',
@@ -22,7 +27,8 @@ const sendMail = (to, subject, text, html) => {
         to,
         subject,
         text,
-        html
+        html,
+        attachments: att || []
     };
 
     transporter.sendMail(mailOptions, (err, info) => {

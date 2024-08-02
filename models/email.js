@@ -1,6 +1,6 @@
 const { Schema } = require("mongoose");
 const mongoose = require("mongoose");
-const userSchema = new Schema({
+const emailSchema = new Schema({
     from: {
         type: String,
         required: true
@@ -17,14 +17,14 @@ const userSchema = new Schema({
         type: String,
         required: true
     },
-    sheduleDay: {
-        type: Date,
+    scheduleDay: {
+        type: Number,
     },
-    sheduleDate: {
+    scheduleDate: {
         type: Number,
     },
     scheduleTime: {
-        type: String,
+        type: Number,
         required: true
     },
     scheduleType: {
@@ -33,10 +33,10 @@ const userSchema = new Schema({
         enum: ['daily', 'weekly', 'monthly', 'quarterly']
     },
     attachment: {
-        type: String,
+        type: Array,
         required: false
     }
 }, { timestamps: true })
 
 
-module.exports = mongoose.models?.User || mongoose.model('User', userSchema)
+module.exports = mongoose.models?.Email || mongoose.model('Email', emailSchema)

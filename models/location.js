@@ -1,6 +1,6 @@
 const { Schema } = require("mongoose");
 const mongoose = require("mongoose");
-const userSchema = new Schema({
+const locationSchema = new Schema({
     name: {
         type: String,
         required: true
@@ -16,4 +16,4 @@ const userSchema = new Schema({
 }, { timestamps: true })
 
 
-module.exports = mongoose.models?.User || mongoose.model('User', userSchema)
+module.exports = mongoose.models?.Location || mongoose.model('Location', locationSchema)

@@ -2,7 +2,7 @@ const { sendShecduledEmail } = require('../actions/sendShecduledEmail');
 const email = require('../models/email');
 
 const sheduleEmail = async (req, res) => {
-    const { from, to, subject, text, scheduleTime, scheduleType, attachment } = req.body;
+    const { from, to, subject, text, scheduleTime, scheduleType, attachment, scheduleDay, scheduleDate } = req.body;
     try {
         const newEmail = new email({
             from,
@@ -10,8 +10,8 @@ const sheduleEmail = async (req, res) => {
             subject,
             text,
             scheduleTime,
-            sheduleDay,
-            sheduleDate,
+            scheduleDay,
+            scheduleDate,
             scheduleType,
             attachment
         });
@@ -74,6 +74,8 @@ const updateTrafficCond = (req, res) => {
         return res.status(500).json({ message: "Internal server error" });
     }
 }
+
+
 
 
 module.exports = { sheduleEmail, retrieveMails, retrieveEmailDetails, deleteShedules }

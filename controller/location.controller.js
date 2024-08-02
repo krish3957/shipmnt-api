@@ -1,3 +1,5 @@
+const location = require("../models/location");
+
 const addLocation = async (req, res) => {
     const { name, latitude, longitude } = req.body;
     try {
