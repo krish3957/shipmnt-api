@@ -2,6 +2,9 @@ const express = require('express');
 const mongoose = require('mongoose');
 const cors = require('cors');
 const bodyParser = require('body-parser');
+const emailRoute = require('./routes/email.route');
+const { addRoad, updateTrafficCond } = require('./controller/road.controller');
+const { addLocation } = require("./controller/location.controller");
 
 require('dotenv').config();
 
@@ -23,7 +26,14 @@ mongoose.connection.on('disconnected', () => {
     console.log('Database is disconnected');
 });
 
+app.use("/email", emailRoute);
+
+app.post("/locations", addLocation)
+app.post("/roads", addRoad);
+app.post("/traffic-updates", updateTrafficCond);
+
+
 const PORT = process.env.PORT || 5000;
 app.listen(PORT, () => {
     console.log(`Server is running on port ${PORT}`);
-})
+});

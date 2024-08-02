@@ -17,14 +17,20 @@ const userSchema = new Schema({
         type: String,
         required: true
     },
-    scheduleTime: {
+    sheduleDay: {
         type: Date,
+    },
+    sheduleDate: {
+        type: Number,
+    },
+    scheduleTime: {
+        type: String,
         required: true
     },
     scheduleType: {
         type: String,
         required: true,
-        enum: ['daily', 'weekly', 'monthly']
+        enum: ['daily', 'weekly', 'monthly', 'quarterly']
     },
     attachment: {
         type: String,
