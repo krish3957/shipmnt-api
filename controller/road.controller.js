@@ -42,6 +42,28 @@ const updateTrafficCond = (req, res) => {
     }
 }
 
+const getTrafficCondition = async (req, res) => {
+    const { id } = req.params;
+    try {
+        const givenRoad = road.findById(id);
+        let cond = "Clear";
+        if (givenRoad.traffic_condition === 1) {
+            cond = "Clear";
+        }
+        else if (givenRoad.traffic_condition === 5) {
+            cond = "Moderate";
+        }
+        else {
+            cond = "heavy"
+        }
+
+        return res.status()
+    }
+    catch (err) {
+        console.log(err);
+        return res.send(500).send({ message: "Internal Server Error" });
+    }
+}
 
 
-module.exports = { addRoad, updateTrafficCond, getAllRoads }
+module.exports = { addRoad, updateTrafficCond, getAllRoads, getTrafficCondition }

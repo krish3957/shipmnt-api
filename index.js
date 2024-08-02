@@ -1,8 +1,9 @@
 const express = require('express');
+const mongoose = require('mongoose');
 const cors = require('cors');
 const bodyParser = require('body-parser');
 const emailRoute = require('./routes/email.route');
-const { addRoad, updateTrafficCond } = require('./controller/road.controller');
+const { addRoad, updateTrafficCond, getTrafficCondition } = require('./controller/road.controller');
 const { addLocation } = require("./controller/location.controller");
 const { dijakstra } = require('./actions/dijakstra');
 
@@ -46,7 +47,10 @@ app.get("shortest-path", async () => {
 
 
 //Bonus task
-// app.get()
+app.get("/roads/:id/traffic-condition", getTrafficCondition);
+
+
+
 
 const PORT = process.env.PORT || 5000;
 app.listen(PORT, () => {
